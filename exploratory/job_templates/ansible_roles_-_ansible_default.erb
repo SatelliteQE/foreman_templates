@@ -1,0 +1,85 @@
+<%#
+name: Ansible Roles - Ansible Default
+snippet: false
+model: JobTemplate
+job_category: Ansible Playbook
+description_format: Run Ansible roles
+provider_type: Ansible
+kind: job_template
+organizations:
+- BhUhPDHFye
+- CIBJkCQvCfgO
+- dBjLriSsq
+- Default Organization
+- DepeSkP
+- DqlpOHzCLFyX
+- drnRRt
+- eAKRHzczPd
+- ERSumL
+- gARZrlgHZn
+- gVBWXLf
+- HeVFgNkFW
+- iBhOdkIBo
+- InxxGMf
+- IWSaxOMON
+- jamtam
+- jUXOTgHXGGp
+- jySYuJN
+- LFUONnUfzQ
+- lGswKra
+- lTqpQkSHcWh
+- MeWGuj
+- mgUzfBAGYui
+- MsOoqpYokh
+- NCywRm
+- org1
+- PGwaHGZIdri
+- QoOaThegmx
+- RGVweWbmnmeI
+- rJgPTBkeTg
+- RxOyKLiTd
+- sOwegXDKtBmd
+- tUlRQwvH
+- UeOsvoTtmC
+- uXolNZydFnMF
+- wHkkJnTNAi
+- WhvvLtTpeo
+- wKdVHbjovY
+- wQnrfInhYVa
+- XwJODjYjbGT
+- YiJVraCXxU
+- zGAzHqh
+locations:
+- ajqpGP
+- b3pQZowPU2
+- BQnkRPmaia
+- ChdBXYBsZlco
+- Default Location
+- gnqIsEtD
+- H1abfbYhw8
+- iXyIzkR
+- KTHWMm
+- Loc1
+- nRnVnIKcIa
+- ONoeatqq
+- qBizSANkVw
+- SJfwaOBSvAHb
+- ViYeEwiX
+- vmeKkU
+- VYkuNrB
+- WeZvFKOiTX
+- wNndyNFmh
+- ZomaYQPo
+- ZVChJBCXnS
+%>
+
+---
+- hosts: all
+  pre_tasks:
+    - name: Display all parameters known for the Foreman host
+      debug:
+        var: foreman
+  roles:
+<%- if @host.all_ansible_roles.present? -%>
+<%=   @host.all_ansible_roles.map { |role| "    - #{role.name.strip}" }.join("\n") %>
+<%- end -%>

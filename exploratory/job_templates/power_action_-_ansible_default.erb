@@ -1,0 +1,94 @@
+<%#
+name: Power Action - Ansible Default
+snippet: false
+template_inputs:
+- name: action
+  required: true
+  input_type: user
+  description: Action to perform on the service
+  options: "restart\r\nshutdown"
+  advanced: false
+  value_type: plain
+model: JobTemplate
+job_category: Ansible Power
+description_format: "%{action} host"
+provider_type: Ansible
+kind: job_template
+organizations:
+- BhUhPDHFye
+- CIBJkCQvCfgO
+- dBjLriSsq
+- Default Organization
+- DepeSkP
+- DqlpOHzCLFyX
+- drnRRt
+- eAKRHzczPd
+- ERSumL
+- gARZrlgHZn
+- gVBWXLf
+- HeVFgNkFW
+- iBhOdkIBo
+- InxxGMf
+- IWSaxOMON
+- jamtam
+- jUXOTgHXGGp
+- jySYuJN
+- LFUONnUfzQ
+- lGswKra
+- lTqpQkSHcWh
+- MeWGuj
+- mgUzfBAGYui
+- MsOoqpYokh
+- NCywRm
+- org1
+- PGwaHGZIdri
+- QoOaThegmx
+- RGVweWbmnmeI
+- rJgPTBkeTg
+- RxOyKLiTd
+- sOwegXDKtBmd
+- tUlRQwvH
+- UeOsvoTtmC
+- uXolNZydFnMF
+- wHkkJnTNAi
+- WhvvLtTpeo
+- wKdVHbjovY
+- wQnrfInhYVa
+- XwJODjYjbGT
+- YiJVraCXxU
+- zGAzHqh
+locations:
+- ajqpGP
+- b3pQZowPU2
+- BQnkRPmaia
+- ChdBXYBsZlco
+- Default Location
+- gnqIsEtD
+- H1abfbYhw8
+- iXyIzkR
+- KTHWMm
+- Loc1
+- nRnVnIKcIa
+- ONoeatqq
+- qBizSANkVw
+- SJfwaOBSvAHb
+- ViYeEwiX
+- vmeKkU
+- VYkuNrB
+- WeZvFKOiTX
+- wNndyNFmh
+- ZomaYQPo
+- ZVChJBCXnS
+%>
+
+---
+- hosts: all
+  tasks:
+    - command: |
+        echo <%= input('action') %> host && sleep 3
+        <%= case input('action')
+          when 'restart'
+            'shutdown -r +1'
+          else
+            'shutdown -h +1'
+          end %>

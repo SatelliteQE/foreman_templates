@@ -1,0 +1,118 @@
+<%#
+name: Package Action - Ansible Default
+snippet: false
+template_inputs:
+- name: state
+  required: true
+  input_type: user
+  description: Whether to install (present, latest), or remove (absent) a package.
+  options: "present\r\nabsent\r\nlatest"
+  advanced: false
+  value_type: plain
+- name: name
+  required: true
+  input_type: user
+  description: "Package name, or package specifier with version, like name-1.0.\r\nBe
+    aware that packages are not always named the same and this module will not 'translate'
+    them per distro."
+  advanced: false
+  value_type: plain
+- name: pre_script
+  required: false
+  input_type: user
+  description: A script to run prior to the package action
+  advanced: true
+  value_type: plain
+- name: post_script
+  required: false
+  input_type: user
+  description: A script to run after the package action
+  advanced: true
+  value_type: plain
+model: JobTemplate
+job_category: Ansible Packages
+description_format: 'Package %{name}: %{state}'
+provider_type: Ansible
+kind: job_template
+organizations:
+- BhUhPDHFye
+- CIBJkCQvCfgO
+- dBjLriSsq
+- Default Organization
+- DepeSkP
+- DqlpOHzCLFyX
+- drnRRt
+- eAKRHzczPd
+- ERSumL
+- gARZrlgHZn
+- gVBWXLf
+- HeVFgNkFW
+- iBhOdkIBo
+- InxxGMf
+- IWSaxOMON
+- jamtam
+- jUXOTgHXGGp
+- jySYuJN
+- LFUONnUfzQ
+- lGswKra
+- lTqpQkSHcWh
+- MeWGuj
+- mgUzfBAGYui
+- MsOoqpYokh
+- NCywRm
+- org1
+- PGwaHGZIdri
+- QoOaThegmx
+- RGVweWbmnmeI
+- rJgPTBkeTg
+- RxOyKLiTd
+- sOwegXDKtBmd
+- tUlRQwvH
+- UeOsvoTtmC
+- uXolNZydFnMF
+- wHkkJnTNAi
+- WhvvLtTpeo
+- wKdVHbjovY
+- wQnrfInhYVa
+- XwJODjYjbGT
+- YiJVraCXxU
+- zGAzHqh
+locations:
+- ajqpGP
+- b3pQZowPU2
+- BQnkRPmaia
+- ChdBXYBsZlco
+- Default Location
+- gnqIsEtD
+- H1abfbYhw8
+- iXyIzkR
+- KTHWMm
+- Loc1
+- nRnVnIKcIa
+- ONoeatqq
+- qBizSANkVw
+- SJfwaOBSvAHb
+- ViYeEwiX
+- vmeKkU
+- VYkuNrB
+- WeZvFKOiTX
+- wNndyNFmh
+- ZomaYQPo
+- ZVChJBCXnS
+%>
+
+# For Windows targets use the win_package module instead.
+---
+- hosts: all
+  <%- if input('pre_script').present? -%>
+  pre_tasks:
+    - shell: "<%= input('pre_script') %>"
+  <%- end -%>
+  tasks:
+    - package:
+        name: <%= input('name') %>
+        state: <%= input('state') %>
+  <%- if input('post_script').present? -%>
+  post_tasks:
+    - shell: "<%= input('post_script') %>"
+  <%- end -%>
